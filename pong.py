@@ -1,8 +1,6 @@
 #PONG pygame
 
-import random
-import pygame, sys
-from pygame.locals import *
+import random, pygame, sys
 
 pygame.init()
 fps = pygame.time.Clock()
@@ -19,8 +17,8 @@ HEIGHT = 400
 BALL_RADIUS = 20
 PAD_WIDTH = 8
 PAD_HEIGHT = 80
-HALF_PAD_WIDTH = PAD_WIDTH / 2
-HALF_PAD_HEIGHT = PAD_HEIGHT / 2
+HALF_PAD_WIDTH = PAD_WIDTH // 2
+HALF_PAD_HEIGHT = PAD_HEIGHT // 2
 ball_pos = [0,0]
 ball_vel = [0,0]
 paddle1_vel = 0
@@ -36,7 +34,7 @@ pygame.display.set_caption('Hello World')
 # if right is True, spawn to the right, else spawn to the left
 def ball_init(right):
     global ball_pos, ball_vel # these are vectors stored as lists
-    ball_pos = [WIDTH/2,HEIGHT/2]
+    ball_pos = [WIDTH//2,HEIGHT//2]
     horz = random.randrange(2,4)
     vert = random.randrange(1,3)
     
@@ -49,8 +47,8 @@ def ball_init(right):
 def init():
     global paddle1_pos, paddle2_pos, paddle1_vel, paddle2_vel,l_score,r_score  # these are floats
     global score1, score2  # these are ints
-    paddle1_pos = [HALF_PAD_WIDTH - 1,HEIGHT/2]
-    paddle2_pos = [WIDTH +1 - HALF_PAD_WIDTH,HEIGHT/2]
+    paddle1_pos = [HALF_PAD_WIDTH - 1,HEIGHT//2]
+    paddle2_pos = [WIDTH +1 - HALF_PAD_WIDTH,HEIGHT//2]
     l_score = 0
     r_score = 0
     if random.randrange(0,2) == 0:
@@ -130,22 +128,22 @@ def draw(canvas):
 def keydown(event):
     global paddle1_vel, paddle2_vel
     
-    if event.key == K_UP:
+    if event.key == pygame.K_UP:
         paddle2_vel = -8
-    elif event.key == K_DOWN:
+    elif event.key == pygame.K_DOWN:
         paddle2_vel = 8
-    elif event.key == K_w:
+    elif event.key == pygame.K_w:
         paddle1_vel = -8
-    elif event.key == K_s:
+    elif event.key == pygame.K_s:
         paddle1_vel = 8
 
 #keyup handler
 def keyup(event):
     global paddle1_vel, paddle2_vel
     
-    if event.key in (K_w, K_s):
+    if event.key in (pygame.K_w, pygame.K_s):
         paddle1_vel = 0
-    elif event.key in (K_UP, K_DOWN):
+    elif event.key in (pygame.K_UP, pygame.K_DOWN):
         paddle2_vel = 0
 
 init()
@@ -158,11 +156,11 @@ while True:
 
     for event in pygame.event.get():
 
-        if event.type == KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             keydown(event)
-        elif event.type == KEYUP:
+        elif event.type == pygame.KEYUP:
             keyup(event)
-        elif event.type == QUIT:
+        elif event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
             
